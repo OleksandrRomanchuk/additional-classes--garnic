@@ -105,7 +105,7 @@ import { listOfStudents, homeworkResults } from "./data.js";
 
 //------------------------------------------------
 //---------------------- functions-constructors ----------------------
-//------------------------------------------------
+// ------------------------------------------------
 // const Student = function (name, email) {
 //   const hwResults = [];
 
@@ -129,11 +129,11 @@ import { listOfStudents, homeworkResults } from "./data.js";
 
 // const studentAnastasia = new Student("Anastasia", "belkina23@mail.com");
 
-// console.log(studentAnastasia.getName());
-// console.log(studentAnastasia.getEmail());
-// console.log(studentAnastasia.getHWResults());
-// console.log(studentAnastasia.addHWResult("HTML/CSS", true));
-// console.log(studentAnastasia.getHWResults());
+// // console.log(studentAnastasia.getName());
+// // console.log(studentAnastasia.getEmail());
+// // console.log(studentAnastasia.getHWResults());
+// // console.log(studentAnastasia.addHWResult("HTML/CSS", true));
+// // console.log(studentAnastasia.getHWResults());
 
 // const FrontendLab = function (students, failedLimit) {
 //   let failedHomeworksLimit = 0;
@@ -155,11 +155,11 @@ import { listOfStudents, homeworkResults } from "./data.js";
 //     });
 //   };
 
-//   this.addHomeworkresults = function (studentsResult) {
+//   this.addHomeworkResults = function (studentResults) {
 //     newStudents.forEach((student) => {
-//       studentsResult.results.forEach((result) => {
+//       studentResults.results.forEach((result) => {
 //         if (result.email === student.getEmail()) {
-//           student.addHWResult(studentsResult.topic, result.success);
+//           student.addHWResult(studentResults.topic, result.success);
 //         }
 //       });
 //     });
@@ -174,12 +174,10 @@ import { listOfStudents, homeworkResults } from "./data.js";
 //         );
 
 //       if (failedHomeworksLimit <= failedLimit) {
-//         const goodStudent = {
+//         studentList.push({
 //           name: student.getName(),
 //           email: student.getEmail(),
-//         };
-
-//         studentList.push(goodStudent);
+//         });
 //       }
 
 //       failedHomeworksLimit = 0;
@@ -190,50 +188,117 @@ import { listOfStudents, homeworkResults } from "./data.js";
 // };
 
 // const a = new FrontendLab(listOfStudents, 1);
+// console.log("a: ", a);
 
-// a.addHomeworkresults(homeworkResults[0]);
-// a.addHomeworkresults(homeworkResults[1]);
-// a.addHomeworkresults(homeworkResults[2]);
-// a.addHomeworkresults(homeworkResults[3]);
-// a.addHomeworkresults(homeworkResults[4]);
+// a.addHomeworkResults(homeworkResults[0]);
+// a.addHomeworkResults(homeworkResults[1]);
+// a.addHomeworkResults(homeworkResults[2]);
+// a.addHomeworkResults(homeworkResults[3]);
+// a.addHomeworkResults(homeworkResults[4]);
 // console.table(a.printStudentsEligibleForTest());
 // a.printStudentsList();
 
 //------------------------------------------------
 //---------------------- Classes ----------------------
 //------------------------------------------------
-// class Student {
-//    #name;
-//    #email;
-//    #hwResults = [];
+// class Student1 {
+//   #name;
+//   #email;
+//   #hwResults = [];
 
-//    constructor(name, email) {
-//       this.#name = name;
-//       this.#email = email;
-//    }
+//   constructor(name, email) {
+//     this.#name = name;
+//     this.#email = email;
+//   }
 
-//    getName() {
-//       return this.#name;
-//    }
+//   getName() {
+//     return this.#name;
+//   }
 
-//    getEmail() {
-//       return this.#email;
-//    }
+//   getEmail() {
+//     return this.#email;
+//   }
 
-//    getHWResults() {
-//       return this.#hwResults;
-//    }
+//   getHWResults() {
+//     return this.#hwResults;
+//   }
 
-//    addHWResult(topic, succes) {
-//       const result = { topic, succes };
-//       this.#hwResults.push(result);
-//    }
+//   addHWResult(topic, success) {
+//     const result = { topic, success };
+//     this.#hwResults.push(result);
+//   }
 // }
 
-// const studentAnastasia = new Student('Anastasia', 'belkina23@mail.com');
+// const studentAnastasia = new Student1("Anastasia", "belkina23@mail.com");
+// // console.log("studentAnastasia: ", studentAnastasia);
 
-// console.log(studentAnastasia.getName());
-// console.log(studentAnastasia.getEmail());
-// console.log(studentAnastasia.getHWResults());
-// console.log(studentAnastasia.addHWResult('HTML/CSS', true));
-// console.log(studentAnastasia.getHWResults());
+// // console.log(studentAnastasia.getName());
+// // console.log(studentAnastasia.getEmail());
+// // console.log(studentAnastasia.getHWResults());
+// // console.log(studentAnastasia.addHWResult("HTML/CSS", true));
+// // console.log(studentAnastasia.getHWResults());
+
+// class FrontendLab {
+//   #failedHomeworksLimit = 0;
+//   #studentList = [];
+
+//   constructor(students, failedLimit) {
+//     this.students = students.map(
+//       ({ name, email }) => new Student1(name, email)
+//     );
+//     this.failedLimit = failedLimit;
+//   }
+
+//   printStudentsList() {
+//     this.students.forEach((student) => {
+//       console.log(
+//         "name: ",
+//         student.getName(),
+//         "email: ",
+//         student.getEmail(),
+//         student.getHWResults()
+//       );
+//     });
+//   }
+
+//   addHomeworkResults(studentResults) {
+//     this.students.forEach((student) => {
+//       studentResults.results.forEach((result) => {
+//         if (student.getEmail() === result.email) {
+//           student.addHWResult(studentResults.topic, result.success);
+//         }
+//       });
+//     });
+//   }
+
+//   printStudentsEligibleForTest() {
+//     this.students.forEach((student) => {
+//       student.getHWResults().forEach(({ success }) => {
+//         !success ? (this.#failedHomeworksLimit += 1) : true;
+//       });
+
+//       //   console.log(this.#failedHomeworksLimit);
+//       if (this.#failedHomeworksLimit <= this.failedLimit) {
+//         this.#studentList.push({
+//           name: student.getName(),
+//           email: student.getEmail(),
+//         });
+//       }
+//       this.#failedHomeworksLimit = 0;
+//     });
+//     return this.#studentList;
+//   }
+// }
+
+// const b = new FrontendLab(listOfStudents, 1);
+// // console.log("b: ", b);
+
+// b.addHomeworkResults(homeworkResults[0]);
+// b.addHomeworkResults(homeworkResults[1]);
+// b.addHomeworkResults(homeworkResults[2]);
+// b.addHomeworkResults(homeworkResults[3]);
+// b.addHomeworkResults(homeworkResults[4]);
+// console.table(b.printStudentsEligibleForTest());
+// // b.printStudentsList();
+
+// // console.log(b);
