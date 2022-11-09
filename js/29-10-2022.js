@@ -3,36 +3,36 @@ import { listOfStudents, homeworkResults } from "./data.js";
 //------------------------------------------------
 //---------------------- bind ----------------------
 //------------------------------------------------
-// const inventory = {
-//    items: ['Knife', 'Gas mask'],
-//    add(itemName) {
-//       console.log(`Adding ${itemName} to inventory`);
+const inventory = {
+  items: ["Knife", "Gas mask"],
+  add(itemName) {
+    console.log(`Adding ${itemName} to inventory`);
 
-//       this.items.push(itemName);
-//    },
-//    remove(itemName) {
-//       console.log(`Removing ${itemName} from inventory`);
+    this.items.push(itemName);
+  },
+  remove(itemName) {
+    console.log(`Removing ${itemName} from inventory`);
 
-//       this.items = this.items.filter(item => item !== itemName);
-//    },
-// };
+    this.items = this.items.filter((item) => item !== itemName);
+  },
+};
 
-// const invokeInventoryAction = function (itemName, action) {
-//    console.log(`Invoking action on ${itemName}`);
-//    action(itemName);
-// };
+const invokeInventoryAction = function (itemName, action) {
+  console.log(`Invoking action on ${itemName}`);
+  action(itemName);
+};
 
-// invokeInventoryAction('Medkit', inventory.add.bind(inventory));
-// // Invoking action on Medkit
-// // Adding Medkit to inventory
+invokeInventoryAction("Medkit", inventory.add.bind(inventory));
+// Invoking action on Medkit
+// Adding Medkit to inventory
 
-// console.log(inventory.items); // ['Knife', 'Gas mask', 'Medkit']
+console.log(inventory.items); // ['Knife', 'Gas mask', 'Medkit']
 
-// invokeInventoryAction('Gas mask', inventory.remove.bind(inventory));
-// // Invoking action on Gas mask
-// // Removing Gas mask from inventory
+invokeInventoryAction("Gas mask", inventory.remove.bind(inventory));
+// Invoking action on Gas mask
+// Removing Gas mask from inventory
 
-// console.log(inventory.items); // ['Knife', 'Medkit']
+console.log(inventory.items); // ['Knife', 'Medkit']
 
 //------------------------------------------------
 //---------------------- call ----------------------
@@ -201,104 +201,103 @@ import { listOfStudents, homeworkResults } from "./data.js";
 //------------------------------------------------
 //---------------------- Classes ----------------------
 //------------------------------------------------
-// class Student1 {
-//   #name;
-//   #email;
-//   #hwResults = [];
+class Student1 {
+  #name;
+  #email;
+  #hwResults = [];
 
-//   constructor(name, email) {
-//     this.#name = name;
-//     this.#email = email;
-//   }
+  constructor(name, email) {
+    this.#name = name;
+    this.#email = email;
+  }
 
-//   getName() {
-//     return this.#name;
-//   }
+  getName() {
+    return this.#name;
+  }
 
-//   getEmail() {
-//     return this.#email;
-//   }
+  getEmail() {
+    return this.#email;
+  }
 
-//   getHWResults() {
-//     return this.#hwResults;
-//   }
+  getHWResults() {
+    return this.#hwResults;
+  }
 
-//   addHWResult(topic, success) {
-//     const result = { topic, success };
-//     this.#hwResults.push(result);
-//   }
-// }
+  addHWResult(topic, success) {
+    const result = { topic, success };
+    this.#hwResults.push(result);
+  }
+}
 
-// const studentAnastasia = new Student1("Anastasia", "belkina23@mail.com");
-// // console.log("studentAnastasia: ", studentAnastasia);
+const studentAnastasia = new Student1("Anastasia", "belkina23@mail.com");
+console.log("studentAnastasia: ", studentAnastasia);
 
-// // console.log(studentAnastasia.getName());
-// // console.log(studentAnastasia.getEmail());
-// // console.log(studentAnastasia.getHWResults());
-// // console.log(studentAnastasia.addHWResult("HTML/CSS", true));
-// // console.log(studentAnastasia.getHWResults());
+console.log(studentAnastasia.getName());
+console.log(studentAnastasia.getEmail());
+console.log(studentAnastasia.getHWResults());
+console.log(studentAnastasia.addHWResult("HTML/CSS", true));
+console.log(studentAnastasia.getHWResults());
 
-// class FrontendLab {
-//   #failedHomeworksLimit = 0;
-//   #studentList = [];
+class FrontendLab {
+  #failedHomeworksLimit = 0;
+  #studentList = [];
 
-//   constructor(students, failedLimit) {
-//     this.students = students.map(
-//       ({ name, email }) => new Student1(name, email)
-//     );
-//     this.failedLimit = failedLimit;
-//   }
+  constructor(students, failedLimit) {
+    this.students = students.map(
+      ({ name, email }) => new Student1(name, email)
+    );
+    this.failedLimit = failedLimit;
+  }
 
-//   printStudentsList() {
-//     this.students.forEach((student) => {
-//       console.log(
-//         "name: ",
-//         student.getName(),
-//         "email: ",
-//         student.getEmail(),
-//         student.getHWResults()
-//       );
-//     });
-//   }
+  printStudentsList() {
+    this.students.forEach((student) => {
+      console.log(
+        "name: ",
+        student.getName(),
+        "email: ",
+        student.getEmail(),
+        student.getHWResults()
+      );
+    });
+  }
 
-//   addHomeworkResults(studentResults) {
-//     this.students.forEach((student) => {
-//       studentResults.results.forEach((result) => {
-//         if (student.getEmail() === result.email) {
-//           student.addHWResult(studentResults.topic, result.success);
-//         }
-//       });
-//     });
-//   }
+  addHomeworkResults(studentResults) {
+    this.students.forEach((student) => {
+      studentResults.results.forEach((result) => {
+        if (student.getEmail() === result.email) {
+          student.addHWResult(studentResults.topic, result.success);
+        }
+      });
+    });
+  }
 
-//   printStudentsEligibleForTest() {
-//     this.students.forEach((student) => {
-//       student.getHWResults().forEach(({ success }) => {
-//         !success ? (this.#failedHomeworksLimit += 1) : true;
-//       });
+  printStudentsEligibleForTest() {
+    this.students.forEach((student) => {
+      student.getHWResults().forEach(({ success }) => {
+        !success ? (this.#failedHomeworksLimit += 1) : true;
+      });
 
-//       //   console.log(this.#failedHomeworksLimit);
-//       if (this.#failedHomeworksLimit <= this.failedLimit) {
-//         this.#studentList.push({
-//           name: student.getName(),
-//           email: student.getEmail(),
-//         });
-//       }
-//       this.#failedHomeworksLimit = 0;
-//     });
-//     return this.#studentList;
-//   }
-// }
+      if (this.#failedHomeworksLimit <= this.failedLimit) {
+        this.#studentList.push({
+          name: student.getName(),
+          email: student.getEmail(),
+        });
+      }
+      this.#failedHomeworksLimit = 0;
+    });
+    return this.#studentList;
+  }
+}
 
-// const b = new FrontendLab(listOfStudents, 1);
-// // console.log("b: ", b);
+const b = new FrontendLab(listOfStudents, 0);
+console.log("b: ", b);
 
-// b.addHomeworkResults(homeworkResults[0]);
-// b.addHomeworkResults(homeworkResults[1]);
-// b.addHomeworkResults(homeworkResults[2]);
-// b.addHomeworkResults(homeworkResults[3]);
-// b.addHomeworkResults(homeworkResults[4]);
-// console.table(b.printStudentsEligibleForTest());
-// // b.printStudentsList();
+b.addHomeworkResults(homeworkResults[0]);
+b.addHomeworkResults(homeworkResults[1]);
+b.addHomeworkResults(homeworkResults[2]);
+b.addHomeworkResults(homeworkResults[3]);
+b.addHomeworkResults(homeworkResults[4]);
+console.table(b.printStudentsEligibleForTest());
+// b.printStudentsList();
 
-// // console.log(b);
+console.log("b: ", b);
